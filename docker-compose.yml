@@ -11,6 +11,8 @@ services:
       - MYSQL_USER=root
       - MYSQL_ROOT_PASSWORD=rezdytechtask
       - MYSQL_DATABASE=lunch
+      - TZ=Australia/Sydney
+    command: ['mysqld', '--default-time-zone=+11:00']
 volumes:
   mysqldata:
     external: false

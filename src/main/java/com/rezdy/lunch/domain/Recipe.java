@@ -1,4 +1,4 @@
-package com.rezdy.lunch.service;
+package com.rezdy.lunch.domain;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -9,11 +9,12 @@ public class Recipe {
     @Id
     private String title;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "recipe_ingredient",
-            joinColumns = @JoinColumn(name = "title"),
+            joinColumns = @JoinColumn(name = "recipe"),
             inverseJoinColumns = @JoinColumn(name = "ingredient"))
+    @OrderBy(value = "title")
     private Set<Ingredient> ingredients;
 
     public String getTitle() {
