@@ -109,10 +109,14 @@ public class RecipeRepositoryTest {
 
     private void assertIngredient(Recipe recipe, String name, LocalDate bestBefore, LocalDate useBy) {
         for (Ingredient ingredient : recipe.getIngredients()) {
-            if (ingredient.getTitle().equalsIgnoreCase(name) && ingredient.getBestBefore().equals(bestBefore) && ingredient.getUseBy().equals(useBy)) {
+            if (ingredient.getTitle().equalsIgnoreCase(name) && sameDates(ingredient.getBestBefore(), bestBefore) && sameDates(ingredient.getUseBy(), useBy)) {
                 return;
             }
         }
         Assertions.fail("Missing or mismatching ingredient: " + name);
+    }
+
+    private boolean sameDates(LocalDate d1, LocalDate d2) {
+        return (d1 == null && d2 == null) || (d1 != null && d2 != null && d1.equals(d2));
     }
 }

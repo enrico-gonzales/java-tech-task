@@ -14,6 +14,11 @@
 * GET _/recipe?excludedIngredient=_ to fetch a list of recipes not including any of the given ingredients by name 
   (_excludedIngredient_ accepts multiple values, e.g.: _/recipe?excludedIngredient=Milk&excludedIngredient=Bread_)
   
+### Assumptions: 
+
+* the "ingredient" table was defined to allow for null dates; these will be considered as "always-valid" 
+  (ingredients will never be considered past their "best before" or "use by" date if the relevant fields are set to null)
+  
 ### Considerations on further refinements required in a real and complex scenario
 * domain objects / entities should be mapped to DTOs at least before leaving the controller layer, 
 even though in the current context DTOs would most likely be merely mirrors of the relevant entities. 
@@ -24,10 +29,10 @@ even though in the current context DTOs would most likely be merely mirrors of t
 
 ### Notes on timezones!
 
-MySQL and the spring-boot runtime must share the same timezone configuration, since LocalDate is zone-sensitive.
+MySQL and the spring-boot runtime must share the same timezone configuration, since I apparently ran into LocalDate zone-sensitiveness.
 For dev/test purposes I tweaked the provided docker-compose.yml. Out-of-the-box, in facts, the container runs in UTC
 while my local dev environment is on Australia/Sydney. 
-Differences in timezones could potentially lead to inaccurate results when querying for recipes by date.
+Differences in timezones were potentially leading to inaccurate results when querying for recipes by date.
 
 
 # Lunch Microservice

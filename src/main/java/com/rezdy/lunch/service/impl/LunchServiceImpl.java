@@ -54,7 +54,7 @@ public class LunchServiceImpl implements LunchService {
     private Optional<LocalDate> getOldestPastBestBeforeDateFromRecipeIngredients(LocalDate date, Recipe o1) {
         return o1.getIngredients().stream()
                 .map(Ingredient::getBestBefore)
-                .filter(bestBefore -> date.isAfter(bestBefore))
+                .filter(bestBefore -> bestBefore != null && date.isAfter(bestBefore))
                 .min(LocalDate::compareTo);
     }
 

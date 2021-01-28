@@ -3,7 +3,6 @@ package com.rezdy.lunch.controller;
 import com.rezdy.lunch.TestRecipeFactory;
 import com.rezdy.lunch.domain.Ingredient;
 import com.rezdy.lunch.domain.Recipe;
-import com.rezdy.lunch.repository.RecipeRepository;
 import com.rezdy.lunch.service.LunchService;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;

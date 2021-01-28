@@ -159,6 +159,22 @@ public class LunchServiceTest {
         verify(mockRecipeRepository).loadByDate(date);
     }
 
+    @Test
+    public void toleratesNullIngredientDatesWhenFetchingRecipesByDates() {
+
+        List<Recipe> recipes = getTestDataSetForSortingWithNullIngredientDates();
+
+        LocalDate date = LocalDate.of(2019, 2, 2);
+        when(mockRecipeRepository.loadByDate(date)).thenReturn(recipes);
+
+        List<Recipe> result = lunchService.getNonExpiredRecipesOnDate(date);
+
+        assertEquals(2, result.size());
+        assertEquals("A-Recipe", result.get(0).getTitle());
+        assertEquals("B-Recipe", result.get(1).getTitle());
+
+        verify(mockRecipeRepository).loadByDate(date);
+    }
 
     private List<Recipe> getTestDataSetForSorting() {
         Recipe r1 = createTestRecipe("B-Recipe");
@@ -178,5 +194,18 @@ public class LunchServiceTest {
         r4.getIngredients().add(createTestIngredient("Ing2", LocalDate.of(2015, 1, 1), LocalDate.of(2022, 1, 1)));
 
         return Arrays.asList(r1, r2, r3, r4);
+    }
+
+    private List<Recipe> getTestDataSetForSortingWithNullIngredientDates() {
+        Recipe r1 = createTestRecipe("B-Recipe");
+        r1.getIngredients().add(createTestIngredient("Ing1", LocalDate.of(2010, 1, 1), LocalDate.of(2020, 1, 1)));
+        r1.getIngredients().add(createTestIngredient("Ing2", LocalDate.of(2012, 1, 1), LocalDate.of(2022, 1, 1)));
+
+        Recipe r2 = createTestRecipe("A-Recipe");
+        r2.getIngredients().add(createTestIngredient("Ing1", LocalDate.of(2010, 1, 1), LocalDate.of(2022, 1, 1)));
+        r2.getIngredients().add(createTestIngredient("Ing2", null, null));
+        r2.getIngredients().add(createTestIngredient("Ing2", LocalDate.of(2015, 1, 1), LocalDate.of(2020, 1, 1)));
+
+        return Arrays.asList(r1, r2);
     }
 }
