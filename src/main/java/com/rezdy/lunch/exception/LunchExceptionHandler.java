@@ -13,7 +13,7 @@ public class LunchExceptionHandler {
 
     @ExceptionHandler(DateTimeParseException.class)
     public ResponseEntity<ErrorResponse> handleValidationException(DateTimeParseException exception) {
-        return new ResponseEntity<>(new ErrorResponse().setErrorMessage("Invalid date parameter"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ErrorResponse("Invalid date parameter"), HttpStatus.BAD_REQUEST);
     }
 
 }

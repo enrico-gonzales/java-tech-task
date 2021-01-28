@@ -3,12 +3,13 @@ package com.rezdy.lunch.dto;
 public class ErrorResponse {
     private String errorMessage;
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public ErrorResponse() {}
+
+    public ErrorResponse(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
-    public ErrorResponse setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-        return this;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 }

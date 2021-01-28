@@ -21,17 +21,15 @@ public class Recipe {
         return title;
     }
 
-    public Recipe setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
-        return this;
     }
 
     public Set<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public Recipe setIngredients(Set<Ingredient> ingredients) {
+    public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
-        return this;
     }
 }

@@ -18,26 +18,23 @@ public class Ingredient {
         return title;
     }
 
-    public Ingredient setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
-        return this;
     }
 
     public LocalDate getBestBefore() {
         return bestBefore;
     }
 
-    public Ingredient setBestBefore(LocalDate bestBefore) {
+    public void setBestBefore(LocalDate bestBefore) {
         this.bestBefore = bestBefore;
-        return this;
     }
 
     public LocalDate getUseBy() {
         return useBy;
     }
 
-    public Ingredient setUseBy(LocalDate useBy) {
+    public void setUseBy(LocalDate useBy) {
         this.useBy = useBy;
-        return this;
     }
 }
